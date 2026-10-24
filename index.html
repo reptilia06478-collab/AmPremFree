@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alight Motion Prem | By PANN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #007BFF;
+            --primary-orange: #FF7A00;
+            --text-light: #F8F9FA;
+            --text-dark: #212529;
+            --card-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: #0b0b0b;
+            color: var(--text-dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #fff;
+        }
+
+        .navbar .logo img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #ddd;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a:hover { color: var(--primary-orange); }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 40px 20px 50px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* VIDEO CONTAINER (Rasio 16:9) */
+        .video-container {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 30px;
+            border-radius: 20px;
+            overflow: hidden; 
+            box-shadow: 0 10px 30px rgba(255, 122, 0, 0.2);
+            border: 1px solid rgba(255, 122, 0, 0.5);
+            background-color: #000; 
+            aspect-ratio: 16 / 9; 
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover; 
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #fff;
+            line-height: 1.2;
+        }
+
+        .hero h1 span.orange { color: var(--primary-orange); }
+        .hero h1 span.blue { color: #00D2FF; }
+
+        .hero p {
+            color: #aaa;
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+        }
+
+        /* Generator Box */
+        .gen-container {
+            background: var(--card-bg);
+            max-width: 480px;
+            margin: 0 auto 60px auto;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border-top: 5px solid var(--primary-orange);
+            position: relative;
+            z-index: 10;
+        }
+
+        .gen-container h2 {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        .gen-container p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e1e1;
+            border-radius: 10px;
+            font-size: 1rem;
+            outline: none;
+            transition: border 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: var(--primary-blue);
+        }
+
+        .btn-generate {
+            background: linear-gradient(90deg, var(--primary-orange), #FF9A44);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 5px 15px rgba(255, 122, 0, 0.3);
+        }
+
+        .btn-generate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 122, 0, 0.5);
+        }
+
+        /* Warning Box */
+        .warning-box {
+            margin-top: 20px;
+            background-color: #FFF3CD;
+            color: #856404;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            border-left: 4px solid #FFCA28;
+            line-height: 1.5;
+        }
+
+        /* Content Sections */
+        .content-wrapper {
+            background: #fff;
+            padding: 60px 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-container {
+            max-width: 800px;
+            margin: 0 auto 50px auto;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary-blue);
+            border-bottom: 3px solid var(--primary-orange);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        /* FAQ */
+        .faq-item {
+            background: #F8F9FA;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .faq-item h4 {
+            color: var(--primary-orange);
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+
+        .faq-item p {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #111;
+            color: #888;
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            border-top: 1px solid #333;
+        }
+
+        footer a {
+            color: var(--primary-orange);
+            text-decoration: none;
+        }
+
+        /* --- CUSTOM MODAL CSS --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-box {
+            background: #fff;
+            padding: 35px 25px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 350px;
+            width: 90%;
+            transform: scale(0.8);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border-top: 5px solid var(--primary-orange);
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: scale(1);
+        }
+
+        .modal-icon {
+            margin-bottom: 15px;
+        }
+
+        .modal-title {
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .modal-text {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .modal-btn {
+            background: var(--primary-blue);
+            color: #fff;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .modal-btn:hover {
+            background: #0056b3;
+        }
+        .modal-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.2rem; }
+            .gen-container { margin: 0 20px 40px 20px; padding: 25px; }
+            .video-container { max-width: 90%; border-radius: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="https://files.catbox.moe/senbll.png" alt="Logo PANN">
+            Alight Motion Prem
+        </div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#faq">FAQ</a>
+            <a href="#policy">Policy</a>
+            <a href="#service">Service</a>
+            <a href="#tentang-pann">PANN</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        
+        <!-- PAKE FILE LOKAL VIDEO.MP4 -->
+        <div class="video-container">
+            <video autoplay loop muted playsinline controls>
+                <source src="video.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <h1>Ubah Akun Alight Motion <br> Menjadi <span class="orange">Premium</span> <span class="blue">Gratis.</span></h1>
+        <p>Masukkan email aktif kamu. Sistem akan mengirimkan link ajaib (Magic Link) untuk verifikasi premium secara instan.</p>
+    </header>
+
+    <main class="gen-container">
+        <h2>Magic Link Generator</h2>
+        <p>Masukkan email yang terdaftar di Alight Motion.</p>
+        
+        <div class="input-group">
+            <input type="email" id="emailInput" placeholder="Contoh: emailkamu@gmail.com">
+            <button class="btn-generate" onclick="generateLink()">Kirim Magic Link</button>
+        </div>
+
+        <div class="warning-box">
+            <b>PENTING:</b> Jika email tidak masuk di kotak masuk utama dalam 1 menit, silakan cek folder <b>Spam</b> di Gmail kamu. Klik "Verifikasi" pada pesan tersebut.
+        </div>
+    </main>
+
+    <!-- Bagian Bawah (Putih Bersih) -->
+    <div class="content-wrapper">
+        <section id="about" class="section-container">
+            <h2 class="section-title">About</h2>
+            <p style="color: #555;">Alight Motion Prem adalah project eksperimental dari PANN yang dibuat untuk memberikan akses premium ke pengguna Alight Motion secara gratis. Kami memanfaatkan sistem otentikasi API internal dan pengiriman email otomatis untuk memproses akun kamu secara instan.</p>
+        </section>
+
+        <section id="faq" class="section-container">
+            <h2 class="section-title">FAQ (Pertanyaan Umum)</h2>
+            
+            <div class="faq-item">
+                <h4>Apakah akun saya akan terblokir?</h4>
+                <p>Tidak. Sistem kami menggunakan Magic Link otentikasi resmi, bukan patch ilegal. Akun kamu aman.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h4>Kenapa harus lewat folder Spam?</h4>
+                <p>Karena email dikirim secara masif oleh sistem, Google sering kali menandainya sebagai spam otomatis. Link tetap valid dan bisa diklik.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Berapa lama prosesnya?</h4>
+                <p>Instan. Begitu kamu klik verifikasi di email, akun kamu langsung berubah jadi premium saat itu juga.</p>
+            </div>
+        </section>
+
+        <section id="policy" class="section-container">
+            <h2 class="section-title">Policy & Service</h2>
+            <ul style="color: #555; margin-left: 20px; font-size: 0.95rem; line-height: 1.8;">
+                <li><b>Privacy Policy:</b> Kami tidak menyimpan atau menjual data email kamu ke pihak ketiga.</li>
+                <li><b>Terms of Service:</b> Layanan ini disediakan "sebagaimana adanya" untuk tujuan edukasi.</li>
+                <li><b>Service:</b> Layanan aktif 24/7. Jika server down, silakan hubungi developer.</li>
+            </ul>
+        </section>
+
+        <section id="tentang-pann" class="section-container">
+            <h2 class="section-title">Tentang PANN</h2>
+            <p style="color: #555;">PANN adalah seorang developer independen yang fokus pada pembuatan tools otomatisasi, eksploitasi web, dan utility script. Project ini dibuat murni untuk mengeksplorasi batas keamanan API dan memberikan dampak positif bagi komunitas.</p>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2026 Alight Motion Prem. All rights reserved.<br>
+        Developed with <span style="color: #ff4d4d;">&hearts;</span> by <a href="#">PANN</a>
+    </footer>
+
+    <!-- CUSTOM MODAL HTML -->
+    <div id="customModal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-icon">
+                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#FF7A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+            </div>
+            <h3 class="modal-title">Berhasil Dikirim!</h3>
+            <p class="modal-text" id="modalMessage">Silakan cek kotak masuk atau folder Spam di Gmail Anda.</p>
+            <button class="modal-btn" onclick="closeModal()">Tutup</button>
+        </div>
+    </div>
+
+    <!-- SCRIPT JS -->
+    <script>
+        function generateLink() {
+            const email = document.getElementById('emailInput').value;
+            const btn = document.querySelector('.btn-generate');
+
+            if (!email || !email.includes('@')) {
+                alert('Masukkan email yang valid!');
+                return;
+            }
+
+            btn.innerHTML = 'Memproses...';
+            btn.style.opacity = '0.7';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                document.getElementById('modalMessage').innerHTML = `Magic Link berhasil dikirim ke <b>${email}</b>!<br><br>Silakan cek folder INBOX atau SPAM di Gmail kamu dan klik tautan verifikasi.`;
+                document.getElementById('customModal').classList.add('active');
+                
+                btn.innerHTML = 'Kirim Magic Link';
+                btn.style.opacity = '1';
+                btn.disabled = false;
+                document.getElementById('emailInput').value = '';
+            }, 2500);
+        }
+
+        function closeModal() {
+            document.getElementById('customModal').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
